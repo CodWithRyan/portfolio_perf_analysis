@@ -1,0 +1,18 @@
+# Virtual environment
+venv/
+.ana_perf_env/
+# Python
+__pycache__/
+*.pyc
+*.pyo
+# Jupyter
+.ipynb_checkpoints/
+# OS
+.DS_Store
+# Data files
+data/
+*.csv
+*.pkl
+# IDE
+.vscode/
+.idea/
