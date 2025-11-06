@@ -24,7 +24,6 @@ Thumbs.db
 *.egg-info/
 
 # Outputs
-notebooks/outputs/*.png
-notebooks/outputs/*.jpg
-notebooks/outputs/*.pdf
+notebooks/outputs/*
+!notebooks/outputs/*.png
 !notebooks/outputs/.gitkeep
