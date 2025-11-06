@@ -106,7 +106,7 @@ def print_portfolio_results(metrics):
     print(tabulate(table, headers='keys', tablefmt='psql'))
 
 
-def plot_cumulative_returns(portfolio_returns, figsize=(10, 7)):
+def plot_cumulative_returns(portfolio_returns, figsize=(10, 7), save_path=None):
     cumprod_ret = (portfolio_returns + 1).cumprod() * 100
     cumprod_ret.index = pd.to_datetime(cumprod_ret.index)
     trough_index = (np.maximum.accumulate(cumprod_ret) - cumprod_ret).idxmax()
@@ -120,10 +120,14 @@ def plot_cumulative_returns(portfolio_returns, figsize=(10, 7)):
     plt.ylabel('Returns in %', fontsize=14)
     plt.legend(['Cumulative Returns', 'Peak and Trough'], fontsize=14)
     plt.grid(which="major", color='k', linestyle='-.', linewidth=0.5)
+
+    if save_path:
+        plt.savefig(save_path, dpi=300, bbox_inches='tight')
+        print(f"Graphique sauvegardé: {save_path}")
     plt.show()
 
 
-def plot_running_maximum_drawdown(portfolio_returns, figsize=(10, 7)):
+def plot_running_maximum_drawdown(portfolio_returns, figsize=(10, 7), save_path=None):
     cumprod_ret = (portfolio_returns + 1).cumprod() * 100
     running_max = np.maximum.accumulate(cumprod_ret)
     running_max[running_max < 1] = 1
@@ -137,10 +141,14 @@ def plot_running_maximum_drawdown(portfolio_returns, figsize=(10, 7)):
     plt.legend(['Running Maximum Drawdown'], fontsize=14)
     plt.grid(which='major', color='k', linestyle='--', linewidth=0.2)
     plt.fill_between(running_max_drawdown.index, running_max_drawdown, alpha=0.5, color='r', linewidth=0)
+
+    if save_path:
+        plt.savefig(save_path, dpi=300, bbox_inches='tight')
+        print(f"Graphique sauvegardé: {save_path}")
     plt.show()
 
 
-def plot_returns_histogram(portfolio_returns, figsize=(10, 7)):
+def plot_returns_histogram(portfolio_returns, figsize=(10, 7), save_path=None):
     returns_clean = portfolio_returns.dropna()
 
     plt.figure(figsize=figsize)
@@ -148,10 +156,14 @@ def plot_returns_histogram(portfolio_returns, figsize=(10, 7)):
     plt.title('Returns', fontsize=16)
     plt.xlabel('Returns in %', fontsize=14)
     plt.ylabel('Number of Days', fontsize=14)
+
+    if save_path:
+        plt.savefig(save_path, dpi=300, bbox_inches='tight')
+        print(f"Graphique sauvegardé: {save_path}")
     plt.show()
 
 
-def plot_monthly_heatmap(portfolio_returns, figsize=(10, 7)):
+def plot_monthly_heatmap(portfolio_returns, figsize=(10, 7), save_path=None):
     returns = portfolio_returns.copy()
     returns.index = pd.to_datetime(returns.index)
 
@@ -173,10 +185,14 @@ def plot_monthly_heatmap(portfolio_returns, figsize=(10, 7)):
     plt.title('Monthly Returns', fontsize=16)
     plt.xlabel('Month', fontsize=14)
     plt.ylabel('Year', fontsize=14)
+
+    if save_path:
+        plt.savefig(save_path, dpi=300, bbox_inches='tight')
+        print(f"Graphique sauvegardé: {save_path}")
     plt.show()
 
 
-def plot_portfolio_vs_benchmark(portfolio_returns, market_returns, leverage=2, figsize=(10, 7)):
+def plot_portfolio_vs_benchmark(portfolio_returns, market_returns, leverage=2, figsize=(10, 7), save_path=None):
     cumprod_ret_leverage = ((portfolio_returns * leverage) + 1).cumprod() * 100
     cumprod_market_ret = (market_returns + 1).cumprod() * 100
 
@@ -188,4 +204,8 @@ def plot_portfolio_vs_benchmark(portfolio_returns, market_returns, leverage=2, f
     plt.ylabel('Annualized Returns', fontsize=14)
     plt.legend(['Portfolio', 'QQQ'], fontsize=14)
     plt.grid(which='major', color='k', linestyle='-.', linewidth=0.5)
+
+    if save_path:
+        plt.savefig(save_path, dpi=300, bbox_inches='tight')
+        print(f"Graphique sauvegardé: {save_path}")
     plt.show()
