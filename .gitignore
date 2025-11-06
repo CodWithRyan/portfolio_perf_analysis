@@ -1,18 +1,24 @@
-# Virtual environment
-venv/
-.ana_perf_env/
 # Python
 __pycache__/
-*.pyc
-*.pyo
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.ana_perf_env/
+
 # Jupyter
 .ipynb_checkpoints/
-# OS
-.DS_Store
-# Data files
-data/
-*.csv
-*.pkl
+*.ipynb_checkpoints
+
 # IDE
 .vscode/
 .idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Project specific
+*.egg-info/
