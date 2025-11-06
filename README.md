@@ -4,7 +4,7 @@
 Implementation of a Risk Parity portfolio strategy with comprehensive performance metrics and visualizations.
 
 ## 🛠️ Installation
-# install the local package in editable mode 
+### install the local package in editable mode 
 pip install -U pip
 pip install -e .
 pip install -r requirements.txt
